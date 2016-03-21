@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>CurryMuch</title>
+
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <script type="text/javascript">
+
+            var ws;
+            var value;       
+
+        function webSocketConnect() {
+           
+            ws=null ;
+            ws = new WebSocket("ws://localhost:8887"); // also can use wss like https
+
+            ws.onopen = function() {
+                alert("open ws");
+            }
+            
+            ws.onmessage = function(e) {
+                    value = e.data ;
+                    alert(value);
+            }
+            ws.onclose = function() {
+                    ws = null;
+                    alert("close ws");
+            }
+     
+        }
+
+        function myFunction() {
+                if(ws){
+                ws.send("ABC");
+                }
+        }
+
+        window.onload = webSocketConnect;
+        </script>
+
+
+    </head>
+    <body>
+
+         <button onclick="myFunction()">PAY</button>
+
+    </body>
+</html>
